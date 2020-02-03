@@ -1,4 +1,8 @@
-SET NAMES utf8mb4;
+DROP DATABASE IF EXISTS vole;
+CREATE DATABASE vole;
+USE vole;
+
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -18,14 +22,14 @@ CREATE TABLE `JOB_EXECUTION_LOG` (
   `start_time` timestamp NULL DEFAULT NULL,
   `complete_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for JOB_STATUS_TRACE_LOG
 -- ----------------------------
 DROP TABLE IF EXISTS `JOB_STATUS_TRACE_LOG`;
 CREATE TABLE `JOB_STATUS_TRACE_LOG` (
-  `id` varchar(40) NOT NULL,
+  `id` varchar(20) NOT NULL,
   `job_name` varchar(100) NOT NULL,
   `original_task_id` varchar(255) NOT NULL,
   `task_id` varchar(255) NOT NULL,
@@ -38,7 +42,7 @@ CREATE TABLE `JOB_STATUS_TRACE_LOG` (
   `creation_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `TASK_ID_STATE_INDEX` (`task_id`,`state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for member_0
@@ -46,17 +50,17 @@ CREATE TABLE `JOB_STATUS_TRACE_LOG` (
 DROP TABLE IF EXISTS `member_0`;
 CREATE TABLE `member_0` (
   `member_id` bigint(64) NOT NULL COMMENT '主键ID',
-  `membername` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '简介',
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
+  `membername` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '简介',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '头像',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0-正常，1-删除',
+  `del_flag` char(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '0' COMMENT '0-正常，1-删除',
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `member_idx1_membername` (`membername`),
   UNIQUE KEY `member_idx2_phone` (`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC COMMENT='用户表';
 
 -- ----------------------------
 -- Records of member_0
@@ -71,17 +75,17 @@ COMMIT;
 DROP TABLE IF EXISTS `member_1`;
 CREATE TABLE `member_1` (
   `member_id` bigint(64) NOT NULL COMMENT '主键ID',
-  `membername` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '简介',
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '头像',
+  `membername` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '简介',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '头像',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0-正常，1-删除',
+  `del_flag` char(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '0' COMMENT '0-正常，1-删除',
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `member_idx1_membername` (`membername`),
   UNIQUE KEY `member_idx2_membername` (`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='用户表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC COMMENT='用户表';
 
 -- ----------------------------
 -- Table structure for member_role_0
@@ -133,7 +137,7 @@ CREATE TABLE `oauth_client_details` (
   `autoapprove` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `oauth_client_idx1` (`client_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oauth_client_details
@@ -171,15 +175,15 @@ COMMIT;
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `role_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `role_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `role_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `role_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `role_desc` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
+  `del_flag` char(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `role_idx1_role_code` (`role_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -281,7 +285,7 @@ CREATE TABLE `sys_zuul_route` (
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `del_flag` char(1) DEFAULT '0' COMMENT '删除标识（0-正常,1-删除）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='动态路由配置表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='动态路由配置表';
 
 -- ----------------------------
 -- Records of sys_zuul_route
